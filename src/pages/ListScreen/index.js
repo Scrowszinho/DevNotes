@@ -1,17 +1,30 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 
 import {
-    Container, Text, Button,
+    Container, Text, AddButton,
+    AddButtonImage
 } from './styles';
-import EditListScreen from '../EditListScreen';
 
 export default () =>{
     const navigation = useNavigation();
+    const list = useSelector(state => state.notes.list);
+
+    useLayoutEffect(()=>{
+        navigation.setOptions({
+            title:'Notes',
+            headerRight:()=> (
+            <AddButton underlayColor='transparent' onPress={()=>navigation.navigate('EditNote')}>
+                <AddButtonImage source={require('../../assets/more.png')} />
+            </AddButton>
+            )
+        })
+    },[]);
+
     return(
         <Container>
-            <Text>Tela de Listagem</Text>
-            <Button title='Ir pra editar' onPress={()=> navigation.navigate('EditNote')} />
+            
         </Container>
     );
 }
