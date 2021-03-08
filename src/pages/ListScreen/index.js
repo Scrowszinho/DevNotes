@@ -5,14 +5,17 @@ import NoteItem from '../../components/NoteItem';
 
 import {
     Container, Text, AddButton,
-    AddButtonImage, NotesList
+    AddButtonImage, NotesList, 
+    NoNotes, NoNotesImg, NoNotesText
 } from './styles';
 
 export default () =>{
     const navigation = useNavigation();
     const list = useSelector(state => state.notes.list);
-    const handleNotePress = () =>{
-
+    const handleNotePress = (index) =>{
+    navigation.navigate('EditNote',{
+    key:index
+    });
     }
     useLayoutEffect(()=>{
         navigation.setOptions({
@@ -27,15 +30,22 @@ export default () =>{
 
     return(
         <Container>
-            <NotesList data={list}
-            renderItem={(item,index)=>(
+            { list.length > 0 &&
+                <NotesList data={list}
+            renderItem={({item,index})=>(
                 <NoteItem 
                 data={item} index={index}
                 onPress={handleNotePress}
                 />
                 )}
             keyExtractor={(item, index)=>index.toString()}
-            />
+            />}
+            { list.length == 0 &&
+            <NoNotes>
+                <NoNotesImg source={require('../../assets/note.png')} />
+                <NoNotesText>Waiting notes...</NoNotesText>
+            </NoNotes>
+            }
         </Container>
     );
 }
