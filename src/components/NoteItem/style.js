@@ -5,7 +5,6 @@ export const Box = styled.TouchableHighlight`
 padding:15px;
 border-style:solid;
 border-color:#222;
-border-bottom:1px;
 border-bottom-width:1px;
 `;
 
