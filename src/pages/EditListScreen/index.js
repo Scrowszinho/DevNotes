@@ -20,17 +20,6 @@ export default () => {
     const [body, setBody] = useState('');
     const [status, setStatuts] = useState('new');
 
-    const handleSaveButton = () => {
-        if (title == '' || body == '') {
-        alert('Title and description is empty!')
-        } else {
-            
-        }
-    }
-
-    const handleCloseButton = () => {
-        navigation.goBack();
-    }
 
     useEffect(() => {
         if (route.params?.key != undefined && list[route.params.key]) {
@@ -40,6 +29,33 @@ export default () => {
         }
     }, []);
 
+
+
+    const handleSaveButton = () => {
+        if (title == '' || body == '') {
+            alert('Title and description is empty!')
+        } else {
+            if (status == 'edit') {
+                dispatch({
+                    type: 'EDIT_NOTE',
+                    payload: {
+                        key: route.params.key,
+                        title, body
+                    }
+                });
+            } else {
+                dispatch({
+                    type: 'ADD_NOTE',
+                    payload: { title, body }
+                });
+            }
+            navigation.goBack();
+        }
+    }
+
+    const handleCloseButton = () => {
+        navigation.goBack();
+    }
 
     useLayoutEffect(() => {
         navigation.setOptions({
