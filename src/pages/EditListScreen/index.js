@@ -6,7 +6,8 @@ import {
     Container, Text,
     TitleInput, BodyInput,
     SaveButton, SaveButtonImage,
-    CloseButton, CloseButtonImage
+    CloseButton, CloseButtonImage, 
+    DeleteButton, DeleteButtonImage
 } from './styles';
 
 export default () => {
@@ -73,6 +74,15 @@ export default () => {
         })
     }, [status, title, body]);
 
+    const handleDelete = () => {
+        dispatch({
+        type:'DEL_NOTE',
+        payload:{
+        key:route.params.key
+        }
+        });
+        navigation.goBack();
+    }
 
     return (
         <Container>
@@ -90,6 +100,10 @@ export default () => {
                 value={body}
                 onChangeText={t => setBody(t)}
             />
+          {status == 'edit' &&
+            <DeleteButton underlayColor='transparent' onPress={handleDelete}>
+                <DeleteButtonImage source={require('../../assets/delete.png')} resizeMode='cover' />
+            </DeleteButton>}
         </Container>
     );
 }
