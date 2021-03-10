@@ -8,7 +8,7 @@ excluir notas digitadas pelo usuário, auxiliando
 as tarefas do dia-a-dia.<br />
 
 <div align="center">
-<img src="./github/gif.gif">
+<img src="./.github/gif.gif">
 </div> <br />
 # 🔧 Ferramentas
 
